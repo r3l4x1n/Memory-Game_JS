@@ -32,4 +32,5 @@ Este juego se basa en conceptos de programación web y utiliza la biblioteca Boo
 
 ---
 
-Diviértete jugando y ¡buena suerte! Si tienes alguna pregunta o comentario, no dudes en ponerte en contacto con nosotros.
+Diviértete jugando y ¡Buena suerte! 
+Si tienes alguna pregunta o comentario, no dudes en ponerte en contacto con nosotros.
