@@ -75,8 +75,8 @@ agregarImagenes();
 function mostrarImagenes() {
     //guardar ID de la imagen
     let imgID = this.getAttribute("id");
-    let isMatched = this.getAttribute("data-matched") === "true"; // Verifica si la tarjeta ya está emparejada
-    if (isMatched) {
+    // Verifica si la tarjeta ya está emparejada o si ya se ha seleccionado
+    if (this.getAttribute("data-matched") === "true" || posImg.includes(imgID)) {
         return;
     }
     this.setAttribute("src", imagenes[imgID].url);
@@ -87,7 +87,10 @@ function mostrarImagenes() {
     if (nombreImg.length == 2) {
         setTimeout(comparaImg, 800);
     }
-}// HAY UN ERROR (AL SELECCIONAR LA MISMA IMAGEN 2 VECES LA DA POR CUMPLIDA)
+}
+
+
+
 
 //funcion para comparar las imagenes
 function comparaImg() {
