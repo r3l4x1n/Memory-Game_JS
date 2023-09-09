@@ -11,11 +11,12 @@ Este es un juego de memoria simple en el que los jugadores deben emparejar carta
 
 ## Cómo jugar
 1. Abre el juego en tu navegador web.
-2. Haz clic en las cartas para voltearlas y revelar la imagen oculta.
-3. Intenta encontrar dos cartas que tengan la misma imagen.
-4. Si las cartas coinciden, se marcarán como emparejadas y se mostrarán.
-5. Si las cartas no coinciden, se volverán a ocultar después de un breve tiempo.
-6. El objetivo es emparejar todas las cartas lo más rápido posible con la menor cantidad de intentos.
+2. Haz clic en el boton iniciar.
+3. Haz clic en las cartas para voltearlas y revelar la imagen oculta.
+4. Intenta encontrar dos cartas que tengan la misma imagen.
+5. Si las cartas coinciden, se marcarán como emparejadas y se mostrarán.
+6. Si las cartas no coinciden, se volverán a ocultar después de un breve tiempo.
+7. El objetivo es emparejar todas las cartas lo más rápido posible con la menor cantidad de intentos.
 
 ## Configuración
 - Puedes personalizar el juego modificando el archivo `funciones.js`.
