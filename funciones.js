@@ -1,4 +1,7 @@
 //variables globales
+const botonIniciar = document.getElementById("boton-iniciar");
+let juegoIniciado = false;
+
 const d = document;
 let imagenes = [
     {
@@ -54,7 +57,18 @@ let tablero = d.querySelector(".tablero");
 let nombreImg = [];
 let posImg = [];
 
-//agregar imagenes al tablero
+// Agregar un manejador de eventos al botón de inicio
+botonIniciar.addEventListener("click", function () {
+    if (!juegoIniciado) {
+        // Iniciar el juego solo si aún no ha comenzado
+        juegoIniciado = true;
+        iniciarJuego();
+    }
+});
+
+// Función para iniciar el juego
+function iniciarJuego() {
+    // Agregar imagenes al tablero
 function agregarImagenes() {
     for (let x = 0; x < imagenes.length; x++) {
         let div = d.createElement("div");
@@ -70,6 +84,8 @@ function agregarImagenes() {
     }
 }
 agregarImagenes();
+};
+
 
 //funcion para mostrar las imagenes
 function mostrarImagenes() {
@@ -89,9 +105,6 @@ function mostrarImagenes() {
     }
 }
 
-
-
-
 //funcion para comparar las imagenes
 function comparaImg() {
     let todasImg = d.querySelectorAll(".tablero .col-3 img");
@@ -108,3 +121,13 @@ function comparaImg() {
     nombreImg = [];
     posImg = [];
 }
+
+/* // Funcion Reiniciar Juego
+function reiniciarJuego() {
+    const cartas = document.querySelectorAll(".tablero .col-3 img");
+    cartas.forEach(function (carta) {
+        carta.src = "imagenes/cover.jpg";
+        carta.dataset.matched = "false";
+    });
+    juegoIniciado = false;
+} */
