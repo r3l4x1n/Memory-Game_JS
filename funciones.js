@@ -56,6 +56,8 @@ let imagenes = [
 let tablero = d.querySelector(".tablero");
 let nombreImg = [];
 let posImg = [];
+let intentos = 0;
+let aciertos = 0;
 
 // Agregar un manejador de eventos al botón de inicio
 botonIniciar.addEventListener("click", function () {
@@ -68,6 +70,11 @@ botonIniciar.addEventListener("click", function () {
 
 // Función para iniciar el juego
 function iniciarJuego() {
+    intentos = 0;
+    aciertos = 0;
+    document.querySelector(".intentos").textContent = intentos;
+    document.querySelector(".aciertos").textContent = aciertos;
+
     // Agregar imagenes al tablero
 function agregarImagenes() {
     for (let x = 0; x < imagenes.length; x++) {
@@ -86,6 +93,29 @@ function agregarImagenes() {
 agregarImagenes();
 };
 
+const botonReiniciar = document.getElementById("boton-reiniciar");
+botonReiniciar.addEventListener("click", function () {
+    reiniciarJuego();
+});
+function reiniciarJuego() {
+    // Restablecer el estado del juego a su estado inicial
+    juegoIniciado = false;
+    nombreImg = [];
+    posImg = [];
+    intentos = 0; 
+    aciertos = 0;
+
+    // Restablecer las imágenes en el tablero a la imagen de portada
+    let todasImg = d.querySelectorAll(".tablero .col-3 img");
+    todasImg.forEach(function (img) {
+        img.setAttribute("src", "imagenes/cover.jpg");
+        img.setAttribute("data-matched", "false");
+    });
+
+    document.querySelector(".intentos").textContent = intentos;
+    document.querySelector(".aciertos").textContent = aciertos;
+    
+}
 
 //funcion para mostrar las imagenes
 function mostrarImagenes() {
@@ -101,9 +131,12 @@ function mostrarImagenes() {
     posImg.push(imgID);
     //ejecutar la funcion comparar imagenes
     if (nombreImg.length == 2) {
+        intentos++; // Incrementa el contador de intentos
+        document.querySelector(".intentos").textContent = intentos; // Actualiza el contador en el DOM
         setTimeout(comparaImg, 800);
     }
 }
+
 
 //funcion para comparar las imagenes
 function comparaImg() {
@@ -114,6 +147,8 @@ function comparaImg() {
         // Marcar las tarjetas como emparejadas
         todasImg[posImg[0]].setAttribute("data-matched", "true");
         todasImg[posImg[1]].setAttribute("data-matched", "true");
+        aciertos++; // Incrementa el contador de aciertos
+        document.querySelector(".aciertos").textContent = aciertos; // Actualiza el contador en el DOM
     } else {
         todasImg[posImg[0]].setAttribute("src", "imagenes/cover.jpg");
         todasImg[posImg[1]].setAttribute("src", "imagenes/cover.jpg");
@@ -122,12 +157,3 @@ function comparaImg() {
     posImg = [];
 }
 
-/* // Funcion Reiniciar Juego
-function reiniciarJuego() {
-    const cartas = document.querySelectorAll(".tablero .col-3 img");
-    cartas.forEach(function (carta) {
-        carta.src = "imagenes/cover.jpg";
-        carta.dataset.matched = "false";
-    });
-    juegoIniciado = false;
-} */
