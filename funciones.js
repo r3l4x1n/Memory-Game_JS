@@ -1,4 +1,4 @@
-//variables globales
+// Variables Globales
 const botonIniciar = document.getElementById("boton-iniciar");
 let juegoIniciado = false;
 const d = document;
@@ -52,6 +52,7 @@ let imagenes = [
         "url": "imagenes/img12.jpg"
     }
 ];
+
 let tablero = d.querySelector(".tablero");
 let nombreImg = [];
 let posImg = [];
@@ -59,10 +60,10 @@ let intentos = 0;
 let aciertos = 0;
 let totalParejas = imagenes.length / 2;
 
-// Agregar un manejador de eventos al botón de inicio
+// Agrega manejador de eventos al botón de inicio
 botonIniciar.addEventListener("click", function () {
     if (!juegoIniciado) {
-        // Iniciar el juego solo si aún no ha comenzado
+        // Inicia el juego solo si aún no ha comenzado.
         juegoIniciado = true;
         iniciarJuego();
     }
@@ -71,7 +72,6 @@ botonIniciar.addEventListener("click", function () {
 let tiempo = 0;
 let intervaloTiempo;
 let juegoTerminado = false;
-
 
 // Función para iniciar el juego
 function iniciarJuego() {
@@ -86,33 +86,34 @@ function iniciarJuego() {
     document.querySelector(".tiempo").textContent = tiempo;
 
     // Agregar imagenes al tablero
-function agregarImagenes() {
-    for (let x = 0; x < imagenes.length; x++) {
-        let div = d.createElement("div");
-        let img = d.createElement("img");
-        div.setAttribute("class", "col-3");
-        img.setAttribute("src", "imagenes/cover.jpg");
-        img.setAttribute("class", "img-fluid altoimg");
-        img.setAttribute("data-matched", "false"); // Nuevo atributo para controlar emparejamiento
-        img.setAttribute("id", x);
-        img.addEventListener("click", mostrarImagenes);
-        div.appendChild(img);
-        tablero.appendChild(div);
+    function agregarImagenes() {
+        for (let x = 0; x < imagenes.length; x++) {
+            let div = d.createElement("div");
+            let img = d.createElement("img");
+            div.setAttribute("class", "col-3");
+            img.setAttribute("src", "imagenes/cover.jpg");
+            img.setAttribute("class", "img-fluid altoimg");
+            img.setAttribute("data-matched", "false"); // Atributo para controlar emparejamiento
+            img.setAttribute("id", x);
+            img.addEventListener("click", mostrarImagenes);
+            div.appendChild(img);
+            tablero.appendChild(div);
+        }
     }
-}
-agregarImagenes();
-    //Iniciar el contador
-intervaloTiempo = setInterval(function () {
-    tiempo++;
-    document.querySelector(".tiempo").textContent = tiempo;
-}, 600);
+    agregarImagenes();
 
+    //Iniciar el contador
+    intervaloTiempo = setInterval(function () {
+        tiempo++;
+        document.querySelector(".tiempo").textContent = tiempo;
+    }, 600);
 };
 
 const botonReiniciar = document.getElementById("boton-reiniciar");
 botonReiniciar.addEventListener("click", function () {
     reiniciarJuego();
 });
+
 function reiniciarJuego() {
     juegoIniciado = false;
     nombreImg = [];
@@ -124,16 +125,15 @@ function reiniciarJuego() {
     document.querySelector(".aciertos").textContent = aciertos;
     document.querySelector(".tiempo").textContent = tiempo;
 
-    // Eliminar todas las tarjetas del tablero
+    // Reinicia las tarjetas del tablero
     tablero.innerHTML = "";
 
     // Reiniciar el contador de tiempo
     clearInterval(intervaloTiempo);
     if (!juegoTerminado) {
-        iniciarJuego(); // Iniciar un nuevo juego si el juego no ha terminado
+        iniciarJuego(); // Reinicia el juego si no ha terminado
     }
-}
-
+};
 
 //funcion para mostrar las imagenes
 function mostrarImagenes() {
@@ -153,8 +153,7 @@ function mostrarImagenes() {
         document.querySelector(".intentos").textContent = intentos; // Actualiza el contador en el DOM
         setTimeout(comparaImg, 800);
     }
-}
-
+};
 
 //funcion para comparar las imagenes
 function comparaImg() {
@@ -171,7 +170,7 @@ function comparaImg() {
         if (aciertos === totalParejas) {
             juegoTerminado = true;
             clearInterval(intervaloTiempo); // Detiene el contador de tiempo
-            // Puedes realizar otras acciones aquí cuando el juego ha terminado
+            guardarResultados(tiempo, intentos); // Llama a la función para guardar los resultados
         }
     } else {
         todasImg[posImg[0]].setAttribute("src", "imagenes/cover.jpg");
@@ -188,8 +187,9 @@ function guardarResultados(tiempo, intentos) {
     // Crear una nueva fila de resultados
     const fila = document.createElement("tr");
 
-    // Crear celdas para Puesto, Tiempo Juego e Intentos Totales
+    // Crear celdas para Puesto, Jugador, Tiempo Juego e Intentos Totales
     const celdaPuesto = document.createElement("td");
+    const celdaJugador = document.createElement("td");
     const celdaTiempo = document.createElement("td");
     const celdaIntentos = document.createElement("td");
 
@@ -198,15 +198,16 @@ function guardarResultados(tiempo, intentos) {
 
     // Establecer los valores de las celdas
     celdaPuesto.textContent = numeroFilas;
+    celdaJugador.textContent = "Player"; // Aquí debes asignar el nombre del jugador si lo tienes
     celdaTiempo.textContent = tiempo;
     celdaIntentos.textContent = intentos;
 
     // Agregar las celdas a la fila
     fila.appendChild(celdaPuesto);
+    fila.appendChild(celdaJugador);
     fila.appendChild(celdaTiempo);
     fila.appendChild(celdaIntentos);
 
     // Agregar la fila a la tabla de estadísticas
     tablaEstadisticas.appendChild(fila);
 }
-
